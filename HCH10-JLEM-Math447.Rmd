@@ -1,0 +1,43 @@
+---
+title: 'Chapter 10(Edition 8): 10.7, 10.8, 10.10'
+author: "Jeremy Ling & Emmanuel Mejia"
+date: "May 15, 2018"
+output: pdf_document
+---
+
+##10.7
+
+\textbf{The brake horsepower developed by an automobile
+engine on a dynamometer is thought to be a function of the
+engine speed in revolutions per minute (rpm), the road octane
+number of the fuel, and the engine compression. An experiment
+is run in the laboratory and the data that follow are
+collected:}
+
+```{r}
+Brake.HP = c(225,212,229,222,219,278,246,237,233,224,223,230)
+RPM = c(2000,1800,2400,1900,1600,2500,3000,3200,2800,3400,1800,2500)
+RON = c(90,94,88,91,86,96,94,90,88,86,90,89)
+Compression = c(100,95,110,96,100,110,98,100,105,97,100,104)
+automob = data.frame(Brake.HP,RPM,RON,Compression)
+```
+
+\textbf{(a) Fit a multiple regression model to these data.}
+
+\textbf{(b) Test for significance of regression. What conclusions
+can you draw?}
+
+\textbf{(c) Based on t-tests, do you need all three regressor variables
+in the model?}
+
+##10.8
+
+\textbf{Analyze the residuals from the regression model in
+Problem 10.7. Comment on model adequacy.}
+
+##10.10
+
+\textbf{Consider the $2^4$ factorial experiment in Example 6.2.
+Suppose that the last observation is missing. Reanalyze the
+data and draw conclusions. How do these conclusions compare
+with those from the original example?}
