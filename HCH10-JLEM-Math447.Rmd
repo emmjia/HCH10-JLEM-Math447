@@ -5,6 +5,11 @@ date: "May 15, 2018"
 output: pdf_document
 ---
 
+```{r}
+# loading libraries
+library(car)
+```
+
 ##10.7
 
 \textbf{The brake horsepower developed by an automobile
@@ -15,6 +20,7 @@ is run in the laboratory and the data that follow are
 collected:}
 
 ```{r}
+# creating data table
 Brake.HP = c(225,212,229,222,219,278,246,237,233,224,223,230)
 RPM = c(2000,1800,2400,1900,1600,2500,3000,3200,2800,3400,1800,2500)
 RON = c(90,94,88,91,86,96,94,90,88,86,90,89)
@@ -25,6 +31,7 @@ automob = data.frame(Brake.HP,RPM,RON,Compression)
 \textbf{(a) Fit a multiple regression model to these data.}
 
 ```{r}
+# linear regression
 brake.lm <- lm(formula = Brake.HP ~ RPM + RON + Compression,
                data = automob)
 ```
@@ -33,6 +40,7 @@ brake.lm <- lm(formula = Brake.HP ~ RPM + RON + Compression,
 can you draw?}
 
 ```{r}
+# summary output
 summary(brake.lm)
 ```
 To check for regression significance, we test for the following:
@@ -55,6 +63,21 @@ For each regressor, we reject the null hypothesis and conclude that we need all 
 
 \textbf{Analyze the residuals from the regression model in
 Problem 10.7. Comment on model adequacy.}
+
+```{r}
+# defining residuals
+res <-automob$Brake.HP - fitted(brake.lm)
+
+# plotting residuals
+plot(fitted(brake.lm),res)
+
+plot(automob$RPM,res)
+plot(automob$RON,res)
+plot(automob$Compression,res)
+
+# checking normality
+qqPlot(res)
+```
 
 ##10.10
 
