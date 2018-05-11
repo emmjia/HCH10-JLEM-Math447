@@ -24,11 +24,32 @@ automob = data.frame(Brake.HP,RPM,RON,Compression)
 
 \textbf{(a) Fit a multiple regression model to these data.}
 
+```{r}
+brake.lm <- lm(formula = Brake.HP ~ RPM + RON + Compression,
+               data = automob)
+```
+
 \textbf{(b) Test for significance of regression. What conclusions
 can you draw?}
 
+```{r}
+summary(brake.lm)
+```
+To check for regression significance, we test for the following:
+
+$H_0: \beta_1 = \dots = \beta_p = 0 \\$
+$H_1: \beta_i \neq 0,$ where $i = i, \dots, p$
+
+From our summary output, we find that the p-value for our F test is .00317.  Rejecting the null hypothesis at $\alpha = .05$, we find that at least one of the regressors is significant in our model.
+
 \textbf{(c) Based on t-tests, do you need all three regressor variables
 in the model?}
+To determine whether or not our regressors are statistically significant to our model, we test for the following:
+
+$H_0: \beta_i = 0 \\$
+$H_1: \beta_i \neq 0$
+
+For each regressor, we reject the null hypothesis and conclude that we need all three regressor variables in the model.
 
 ##10.8
 
