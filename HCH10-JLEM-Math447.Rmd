@@ -5,9 +5,15 @@ date: "May 15, 2018"
 output: pdf_document
 ---
 
-```{r}
+```{r,  warning=FALSE, message=FALSE}
 # loading libraries
 library(car)
+library(gplots)
+#code function
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
 ```
 
 ##10.7
@@ -79,9 +85,39 @@ plot(automob$Compression,res)
 qqPlot(res)
 ```
 
+After analyizing our residuals. We see that residuals for our model is good because there is no pattern and that we have random residuals displayed. We check the residuals for our predictors and all residuals are random and patternless. We quickly check normality and we seem some residuals are slighly off, normality may be off but because of the residuals our model is good.
+
 ##10.10
 
 \textbf{Consider the $2^4$ factorial experiment in Example 6.2.
 Suppose that the last observation is missing. Reanalyze the
 data and draw conclusions. How do these conclusions compare
 with those from the original example?}
+
+```{r}
+A <- rep(x = c("-", "+"), times = 8)
+B <- rep(x = c("-","+"), each = 2, times = 4)
+C <- rep(x = c("-","+"), each = 4, times = 2)
+D <- rep(x = c("-","+"), each = 8)
+FilRate <- c(45,71,48,65,68,60,80,65,43,100,45,104,75,86,70,96)
+chemical <- data.frame(A,B,C,D,FilRate)
+```
+
+```{r, fig.show="hide"}
+qqnorm(aov(FilRate~A*B*C*D, chemical), label = TRUE)#AC AD
+```
+
+```{r}
+#regular Linear Regression
+chem.lm <- lm(FilRate ~ A*C + A*D, chemical); summary(chem.lm)
+```
+
+```{r, fig.show="hide"}
+chemicalMissO <- chemical[-c(16),]
+qqnorm(aov(FilRate ~ A*B*C*D, chemicalMissO), label = TRUE)#AC AD
+```
+
+```{r}
+#missing observation Linear Regression
+chemmo.lm <- lm(FilRate ~ A*C + A*D, chemicalMissO); summary(chemmo.lm)
+```
