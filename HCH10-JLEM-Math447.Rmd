@@ -70,7 +70,7 @@ For each regressor, we reject the null hypothesis and conclude that we need all 
 \textbf{Analyze the residuals from the regression model in
 Problem 10.7. Comment on model adequacy.}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # defining residuals
 res <-automob$Brake.HP - fitted(brake.lm)
 
@@ -121,3 +121,16 @@ qqnorm(aov(FilRate ~ A*B*C*D, chemicalMissO), label = TRUE)#AC AD
 #missing observation Linear Regression
 chemmo.lm <- lm(FilRate ~ A*C + A*D, chemicalMissO); summary(chemmo.lm)
 ```
+
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+#residual analysis for regular linear model
+res1 = chemical$FilRate - fitted(chem.lm)
+qqPlot(res1)
+plot(fitted(chem.lm), res1)
+#residual analysis for missing observation linear model
+res2 = chemicalMissO$FilRate - fitted(chemmo.lm)
+qqPlot(res2)
+plot(fitted(chemmo.lm), res2)
+```
+
+After dropping the last observation, we still are dealing with four factors and must pick the most significant factors to the response variable. We choose to use half normal probability plot to pick out those important factors. We still get interaction effects AC and AD from the plot. We check the linear model's p-values and check and compare the residual plots Both regression types have excellent residuals so we can state both regression models are good. As we mentioned earlier AC and AD are important and we see that those effects are importantly the same in the regular linear regression without the missing observation.
